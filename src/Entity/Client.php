@@ -27,7 +27,7 @@ class Client
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Authentification $idAuth = null;
+    private ?User $idUser = null;
 
 
 
@@ -84,14 +84,14 @@ class Client
         return $this;
     }
 
-    public function getIdAuth(): ?Authentification
+    public function getidUser(): ?User
     {
-        return $this->idAuth;
+        return $this->idUser;
     }
 
-    public function setIdAuth(Authentification $idAuth): static
+    public function setidUser(User $idUser): static
     {
-        $this->idAuth = $idAuth;
+        $this->idUser = $idUser;
 
         return $this;
     }
