@@ -34,9 +34,20 @@ label{
     font-size: 20px;
 }
 input{
-    margin-bottom: 20px;
-    border: 2px solid;
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    width: 300px;
+    border-bottom: 1px solid #757575;
+    border: 2px none; 
     border-radius: 4px;
+    margin-bottom: 20px;
+
+}
+input[type="checkbox"] {
+    margin-left: 10px;
+    margin-top: 2px;
+    width: 1.15em;
+    height: 1.15em;
 }
 .title{
     margin-top: 5rem;
