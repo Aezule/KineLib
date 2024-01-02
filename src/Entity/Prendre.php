@@ -9,7 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Prendre
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?\DateTime $DateRdv = null;
 
@@ -21,7 +20,7 @@ class Prendre
     #[ORM\JoinColumn(nullable: false)]
     private ?Client $IdClient = null;
 
-    public function getId(): ?int
+    public function getdate(): ?\Datetime
     {
         return $this->DateRdv;
     }
@@ -29,6 +28,13 @@ class Prendre
     public function getIdKine(): ?Kine
     {
         return $this->IdKine;
+    }
+
+    public function setDateRdv(?Kine $daterdv): static
+    {
+        $this->DateRdv = $daterdv;
+
+        return $this;
     }
 
     public function setIdKine(?Kine $IdKine): static
