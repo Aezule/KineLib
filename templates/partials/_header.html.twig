@@ -20,7 +20,11 @@
         
       </ul>
       <div class="btncompte">
-          <a href="/choix">Compte</a>
+      {% if is_granted('ROLE_USER') %}<a href="#">Compte</a>
+      {% else %}
+        
+          <a href="/register">Compte</a>
+      {% endif %}
       </div>
     </div>
   </div>
