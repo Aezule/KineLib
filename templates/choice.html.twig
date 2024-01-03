@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('./bootstrap.min.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('./register.css') }}">    
+   
+{% endblock %}
+
+{% block body %}
+<div class="align">
+<div class="title">
+        <h1>Vous etes ?</h1>
+    </div>
+
+<div class=" boutonchoix">
+<div class="btn"><a href="./registerKine">Kiné</a></div>
+
+<div class="btn"><a href="./register">Client</a></div>
+
+</div>
+
+</div>
+    
+{% endblock %}
+
+
