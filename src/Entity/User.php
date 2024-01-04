@@ -17,10 +17,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\ManyToOne(inversedBy: "kines")]
+    #[ORM\JoinColumn(name: "idSpe", referencedColumnName: "idSpe", nullable: true)]
+    private ?Specialisation $idSpe = null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $nom = null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $prenom = null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $tel = null;
+
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type:"json")]
     private array $roles = [];
 
     /**
@@ -28,6 +41,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+   
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
@@ -48,6 +63,54 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+    public function getidSpe(): ?Specialisation
+    {
+        return $this->idSpe;
+    }
+
+    public function setidSpe(?Specialisation $idSpe): static
+    {
+        $this->idSpe = $idSpe;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): static
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): static
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getTel(): ?string
+    {
+        return $this->tel;
+    }
+
+    public function setTel(string $tel): static
+    {
+        $this->tel = $tel;
+
+        return $this;
+    }
+
 
     /**
      * A visual identifier that represents this user.

@@ -65,3 +65,22 @@ input[type="checkbox"] {
     text-decoration: none;
     color: white;
 }
+.choixrole input[type="radio"] {
+    display: none;
+}
+
+.choixrole label {
+    margin: 2px;
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 16px;
+    border: 2px solid #3498db;
+    color: #3498db;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.choixrole input[type="radio"]:checked + label {
+    background-color: #3498db;
+    color: #fff;
+}

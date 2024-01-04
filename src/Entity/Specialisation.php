@@ -18,8 +18,6 @@ class Specialisation
     #[ORM\Column(length: 50)]
     private ?string $libelle = null;
 
-    #[ORM\OneToMany(mappedBy: 'codeSpe', targetEntity: Kine::class)]
-    private Collection $kines;
 
     public function __construct()
     {
@@ -43,33 +41,4 @@ class Specialisation
         return $this;
     }
 
-    /**
-     * @return Collection<int, Kine>
-     */
-    public function getKines(): Collection
-    {
-        return $this->kines;
-    }
-
-    public function addKine(Kine $kine): static
-    {
-        if (!$this->kines->contains($kine)) {
-            $this->kines->add($kine);
-            $kine->setidSpe($this);
-        }
-
-        return $this;
-    }
-
-    public function removeKine(Kine $kine): static
-    {
-        if ($this->kines->removeElement($kine)) {
-            // set the owning side to null (unless already changed)
-            if ($kine->getidSpe() === $this) {
-                $kine->setidSpe(null);
-            }
-        }
-
-        return $this;
-    }
 }

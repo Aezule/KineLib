@@ -14,42 +14,42 @@ class Prendre
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Kine $IdKine = null;
+    private ?User $IdKine = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Client $IdClient = null;
+    private ?User $IdClient = null;
 
     public function getdate(): ?\Datetime
     {
         return $this->DateRdv;
     }
 
-    public function getIdKine(): ?Kine
+    public function getIdKine(): ?User
     {
         return $this->IdKine;
     }
 
-    public function setDateRdv(?Kine $daterdv): static
+    public function setDateRdv(?User $daterdv): static
     {
         $this->DateRdv = $daterdv;
 
         return $this;
     }
 
-    public function setIdKine(?Kine $IdKine): static
+    public function setIdKine(?User $IdKine): static
     {
         $this->IdKine = $IdKine;
 
         return $this;
     }
 
-    public function getIdClient(): ?Client
+    public function getIdClient(): ?User
     {
         return $this->IdClient;
     }
 
-    public function setIdClient(?Client $IdClient): static
+    public function setIdClient(?User $IdClient): static
     {
         $this->IdClient = $IdClient;
 
