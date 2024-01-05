@@ -30,14 +30,18 @@ class RegistrationFormType extends AbstractType
             ->add('prenom')
             ->add('tel', TelType::class)
             ->add('roles', ChoiceType::class, [
-                'mapped' => false,
                 'required' => true,
+                'multiple' => false,
+                'expanded' => true,
                 'choices' => [
-                    'Kiné' => 'kine',
-                    'Client' => 'client',
+                    'Client' => 'CLIENT',
+                    'Kiné' => 'KINE',
                 ],
-                'expanded' => true, 
-                'multiple' => false, 
+                'choice_attr' => function($value, $key, $index) {
+                    return [
+                        'value' => $value,
+                    ];
+                },
             ])
             ->add('agreeTerms', CheckboxType::class, [
                                 'mapped' => false,
@@ -46,7 +50,9 @@ class RegistrationFormType extends AbstractType
                         'message' => 'You should agree to our terms.',
                     ]),
                 ],
+                
             ])
+
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'constraints'=> [new NotBlank([
