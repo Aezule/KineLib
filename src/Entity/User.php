@@ -125,13 +125,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
-    public function getRoles(): string
+    public function getRoles(): array
     {
-        $roles = [];
-        $roles = $this->roles;
+        $rolesl = [];
+        array_push($rolesl,$this->roles);
         // guarantee every user at least has ROLE_USER
 
-        return $roles;
+        return $rolesl;
     }
 
     public function setRoles(string $roles): static
