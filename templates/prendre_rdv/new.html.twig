@@ -14,7 +14,7 @@
     <div class="card-header">{{resultat.jourC}}</div>
     <div class="card-body">
         {% for heure in resultat.dispo %}
-            <a type="button" name="heure" href="{{path('rdv.conf', {IdKine: resultat.IdKine, 'date': resultat.abrege ~ '-' ~ heure} )}}" class="btn btn-primary mt-1" id="{{resultat.abrege}}-{{heure}}">{{heure}}</a> 
+                <a type="button" name="heure" href="{{ path('rdv.conf', {'IdKine': resultat.IdKine, 'date': resultat.abrege, 'heure': heure} ) }}" class="btn btn-primary mt-1" id="{{resultat.abrege}}-{{heure}}">{{heure}}</a>
         {% endfor %}
     </div>
     </div>

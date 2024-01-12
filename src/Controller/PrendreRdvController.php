@@ -43,9 +43,10 @@ if ($user instanceof User) {
     $rdv = new Prendre();
     $rdv->setKine($kine);
     $rdv->setClient($user);
-
-    $dateString = $_GET['date'];
-    $dateTime = new DateTime($dateString);
+    
+    $dateString = $request->query->get('date');
+    $heure = $request->query->get('heure');
+    $dateTime = new DateTime($dateString . ' ' . $heure);
     $rdv->setDateRdv($dateTime);
 
     $entityManager->persist($rdv);
