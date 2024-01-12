@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Kinélib - Disponibilité"{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1 class="mt-4">Prise de Rendez-vous</h1>
+
+    <h4 class="mt-4">Choisissez une horaire qui vous convient :</h4>
+    {% for resultat in resultats %}
+        
+    <p></p>
+    <div class="card border-primary mb-3 mt-4 d-inline-flex" style="max-width: 20rem;">
+    <div class="card-header">{{resultat.jourC}}</div>
+    <div class="card-body">
+        {% for heure in resultat.dispo %}
+            <a type="button" name="heure" href="{{path('rdv.conf', {IdKine: resultat.IdKine, 'date': resultat.abrege ~ '-' ~ heure} )}}" class="btn btn-primary mt-1" id="{{resultat.abrege}}-{{heure}}">{{heure}}</a> 
+        {% endfor %}
+    </div>
+    </div>
+     {% endfor %}
+    <div class="navigation d-flex justify-content-center mt-4">
+        {{ knp_pagination_render(resultats) }}
+    </div>
+</div>
+{% endblock %}

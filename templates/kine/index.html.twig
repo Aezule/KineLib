@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Kinélib - Nos kinés{% endblock %}
+
+{% block body %}
+    <div class="container">
+    <h1>Liste de nos Kinés :</h1>
+        {% if not kines.items is same as ([]) %}
+        
+
+            <div class="count mt-4">
+                <h4>Nous avons {{ kines.getTotalItemCount }} kinés à vous proposer pour vos besoins.</h4>
+            </div>
+
+            <table class="table table-hover mt-4">
+            <thead>
+                <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Prenom</th>
+                <th scope="col">Téléphone</th>
+                <th scope="col">Email</th>
+                <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for kine in kines %}
+                
+                <tr class="table-primary">
+                    <th scope="row">{{kine.nom}}</th>
+                    <td>{{kine.prenom}}</td>
+                    <td>{{kine.tel}}</td>
+                    <td>{{kine.email}}</td>
+                    <td><a type="button" class="btn btn-primary" href="{{ path('rdv.new', {IdKine: kine.id }) }}">Prendre rendez-vous</a></td>
+                </tr>
+                {% endfor %}
+                
+            </tbody>
+            </table>
+            <div class="navigation d-flex justify-content-center mt-4">
+                {{ knp_pagination_render(kines) }}
+            </div>
+        {% else %}
+            <h4>Il n'y a pas de Kinés pour vos recherche.</h4>
+        {% endif %}
+    </div>
+{% endblock %}

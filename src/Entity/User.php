@@ -129,8 +129,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $rolesl = [];
         array_push($rolesl,$this->roles);
-        // guarantee every user at least has ROLE_USER
-
         return $rolesl;
     }
 
