@@ -2,13 +2,25 @@
 
 {% block title %}Hello PrendreRdvController!{% endblock %}
 
+
+
 {% block body %}
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Le rendez vous est reservé merci de votre confiance !</h1>
-</div>
+
+{% for flashMessage in app.session.flashbag.get('Success') %}
+    <div class="alert alert-success" role="alert">
+       {{ flashMessage }}
+    </div>
+{% endfor %}
+{# templates/your_template.html.twig #}
+{% for flashMessage in app.session.flashbag.get('Attention') %}
+    <div class="alert alert-success" role="alert">
+        {{ flashMessage }}
+    </div>
+{% endfor %}
+
 {% endblock %}

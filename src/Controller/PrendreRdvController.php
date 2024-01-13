@@ -15,6 +15,7 @@ use Symfony\Component\Security\Core\Security;
 use Doctrine\Persistence\ManagerRegistry;
 
 
+
 class PrendreRdvController extends AbstractController
 {
     private $nombreDeJours =48;
@@ -50,15 +51,21 @@ if ($user instanceof User) {
     $rdv->setDateRdv($dateTime);
 
     $entityManager->persist($rdv);
-    $entityManager->flush();
-            var_dump($rdv);
-         }
-         else{
-            
-         }
-        
+
+    // désolé 
+    try {
+         $entityManager->flush();
+         $this->addFlash('Success','Le rendez vous est reservé merci de votre confiance !');
+         return $this->render('prendre_rdv/conf.html.twig');
+    } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
+
+        $this->addFlash('Attention', 'Il y a déjà un rendez vous a cette heure la !');
 
         return $this->render('prendre_rdv/conf.html.twig');
+    }
+   
+         }
+        
     }
 
     /**
@@ -66,40 +73,44 @@ if ($user instanceof User) {
      * passé en paramètre
      */
     #[Route('/rdv/nouveau/{IdKine}', name: 'rdv.new')]
-    public function getDatesSuivantesSansWeekend(User $kine, PaginatorInterface $paginator, Request $request, Security $security) {
-        $resultat = array();
-        $dateCourante = new DateTime();
-        $IdKine = $request->attributes->get('IdKine');
+public function getDatesSuivantesSansWeekend(User $kine, PaginatorInterface $paginator, Request $request, Security $security)
+{
+    $resultat = array();
+    $dateCourante = new DateTime();
+    $IdKine = $request->attributes->get('IdKine');
+
+    $dispo = array(
+        '8:00',
+        '9:00',
+        '10:00',
+        '11:00',
+        '14:00',
+        '15:00',
+        '16:00'
+    );
+
+    while (count($resultat) < $this->nombreDeJours) {
+        // Ajoutez un jour à la date courante
+        $dateCourante->modify('+1 day');
         
-        $dispo =array (
-            '8:00',
-            '9:00',
-            '10:00',    
-            '11:00',
-            '14:00',
-            '15:00',
-            '16:00'
-        );
-        while (count($resultat) < $this->nombreDeJours) {
-            // Ajoutez un jour à la date courante
-            $dateCourante->modify('+1 day');
-    
-            // Si le jour n'est ni un samedi ni un dimanche, ajoutez-le aux résultats
-            if ($dateCourante->format('N') < 6) {
+        if ($dateCourante->format('N') < 6) {
                 $resultat[] = array(
                     'jourC' => $dateCourante->format('l-d-F'), // Jour de la semaine (nom complet)
                     'abrege' => $dateCourante->format('Y-m-d'),
-                    'dispo' => $dispo, 
+                    'dispo' => $dispo,
                     'IdKine' => $IdKine,
                 );
-            }
-        }
-        $resultats= $paginator->paginate(
-            $resultat,
-            $request->query->getInt('page', 1),
-            12 
-        );
-    
-        return $this->render('prendre_rdv/new.html.twig',['resultats' => $resultats]);
+
+        
     }
+    }
+    $resultats = $paginator->paginate(
+        $resultat,
+        $request->query->getInt('page', 1),
+        12
+    );
+
+    return $this->render('prendre_rdv/new.html.twig', ['resultats' => $resultats]);
+}
+
 }

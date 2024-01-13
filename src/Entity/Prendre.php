@@ -16,7 +16,7 @@ class Prendre
 
 
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, unique:true)]
     private ?\DateTimeInterface $DateRdv = null;
 
     #[ORM\ManyToOne]

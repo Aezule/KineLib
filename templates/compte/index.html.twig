@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+{% block title %}Mon compte{% endblock %}
+
+
+{% block header %} 
+  {% include "partials/_header.html.twig" %}
+  <link rel="stylesheet" href="{{ asset('./compte.css') }}">
+{% endblock %}
+
+{% block body %}
+
+
+<form>
+
+    <legend>Mon compte</legend>
+    <div class="form-group">
+      <label for="exampleInputEmail1" class="form-label mt-4"> Adresse Email</label>
+      <input type="email" class="form-control" id="Prenom" value="{{user.prenom}}" disabled>
+    </div>
+        <div class="form-group">
+      <label for="exampleInputEmail1" class="form-label mt-4"> Adresse Email</label>
+      <input type="email" class="form-control" id="Nom" value="{{user.nom}}" disabled>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1" class="form-label mt-4"> Adresse Email</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" value="{{user.email}}" disabled>
+    </div>
+
+
+    <div class="btnlogout">
+        <a href="/logout" class="btn btn-primary">Deconnexion</a>
+    </div>
+
+    
+</form>
+
+{% endblock %}
+
